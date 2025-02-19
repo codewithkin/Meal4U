@@ -5,9 +5,12 @@ import axios from "axios";
 export async function GET () {
     try {
         // Get all of the meal categories
-        const data = await axios.get("https://www.themealdb.com/api/json/v1/1/categories.php");
+        const response = await axios.get("https://www.themealdb.com/api/json/v1/1/categories.php");
 
-        return NextResponse.json(data);
+        const categoryData = response.data
+        console.log("DATA: ", categoryData);
+
+        return NextResponse.json(categoryData);
     } catch (e) {
         console.log("An error occured while fetching categories: ", e);
         return NextResponse.json({
