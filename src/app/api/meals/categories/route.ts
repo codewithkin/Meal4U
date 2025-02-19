@@ -3,8 +3,15 @@ import { NextResponse } from "next/server";
 import axios from "axios";
 
 export async function GET () {
-    // Get all of the meal categories
-    const data = await axios.get("www.themealdb.com/api/json/v1/1/categories.php");
+    try {
+        // Get all of the meal categories
+        const data = await axios.get("www.themealdb.com/api/json/v1/1/categories.php");
 
-    return NextResponse.json(data);
+        return NextResponse.json(data);
+    } catch (e) {
+        console.log("An error occured while fetching categories: ", e);
+        return NextResponse.json({
+            message: "Sorry, an error occured"
+        }, { status: 500 });
+    }
 }
