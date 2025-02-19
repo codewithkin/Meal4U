@@ -18,7 +18,17 @@ export default function CategoryMeals() {
         queryKey: ["meals", category], // Include category to refetch when it changes
         queryFn: async () => {
             const response = await axios.get(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`);
-            return response.data.meals; // ✅ Extract meals from response
+            const mealSummaries = response.data.meals;
+            
+            // Fetch full details for each meal in parallel
+            const fullMeals = await Promise.all(
+                mealSummaries.map(async (meal: Meal) => {
+                    const detailResponse = await axios.get(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${meal.idMeal}`);
+                    return detailResponse.data.meals[0]; // Return full meal details
+                })
+            );
+            
+            return fullMeals;
         },
         enabled: !!category, // Prevents fetching if category is null
     });
@@ -28,8 +38,6 @@ export default function CategoryMeals() {
     if (error) return <p>Error: {error.message}</p>;
 
     if (!meals || meals.length === 0) return <p>No meals found for {category}.</p>;
-
-    console.log("Meals: ", meals);
 
     return (
         <article className="grid md:grid-cols-3 lg:grid-cols-4 sm:grid-cols-2 gap-8">
@@ -43,22 +51,27 @@ export default function CategoryMeals() {
                             width={400}
                             height={100}
                         />
-
                     </CardHeader>
 
                     <CardContent>
                         <article className="flex flex-wrap gap-4">
                             {
                                 meal.strTags &&
-                                <Badge>{meal.strTags}</Badge>
+                                meal.strTags.split(',').map((tag, index) => (
+                                    <Badge key={index}>{tag.trim()}</Badge>
+                                ))
                             }
                         </article>
 
                         <CardTitle className="text-2xl font-semibold">{meal.strMeal}</CardTitle>
 
                         <CardDescription>
-                            {meal.strCategory}
+                            {meal.strCategory} - {meal.strArea}
                         </CardDescription>
+
+                        <p className="mt-2 text-sm text-gray-600">
+                            {meal.strInstructions.slice(0, 100)}...
+                        </p>
                     </CardContent>
                 </Card>
             ))}
