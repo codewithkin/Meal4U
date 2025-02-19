@@ -8,7 +8,6 @@ export async function GET () {
         const response = await axios.get("https://www.themealdb.com/api/json/v1/1/categories.php");
 
         const categories = response.data as { categories: category[] };
-        console.log("DATA: ", categories);
 
         return NextResponse.json({categories});
     } catch (e) {

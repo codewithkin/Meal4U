@@ -10,8 +10,6 @@ export async function GET({ query }: { query: { category: string } }) {
     // Feth the meals for the current category
     const response = await axios.get(`https://www.themealdb.com/api/json/v1/1/lookup.php?c=${category}`);
 
-    console.log("Response: ", response);
-
     const meal = response.data?.meals?.[0] as Meal;
 
     if (!meal) {

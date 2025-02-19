@@ -3,8 +3,9 @@ import useCategoryStore from "@/stores/categoryStore";
 import { Meal } from "@/types";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { Card, CardHeader, CardTitle } from "./ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./ui/card";
 import Image from "next/image";
+import { Badge } from "./ui/badge";
 
 export default function CategoryMeals() {
     // Get the current category from the Zustand store
@@ -28,8 +29,10 @@ export default function CategoryMeals() {
 
     if (!meals || meals.length === 0) return <p>No meals found for {category}.</p>;
 
+    console.log("Meals: ", meals);
+
     return (
-        <article className="grid md:grid-cols-3 lg:grid-cols-4 sm:grid-cols-2">
+        <article className="grid md:grid-cols-3 lg:grid-cols-4 sm:grid-cols-2 gap-8">
             {meals.map((meal: Meal) => (
                 <Card key={meal.idMeal}>
                     <CardHeader>
@@ -41,8 +44,22 @@ export default function CategoryMeals() {
                             height={100}
                         />
 
-                        <CardTitle className="text-2xl font-semibold mt-4">{meal.strMeal}</CardTitle>
                     </CardHeader>
+
+                    <CardContent>
+                        <article className="flex flex-wrap gap-4">
+                            {
+                                meal.strTags &&
+                                <Badge>{meal.strTags}</Badge>
+                            }
+                        </article>
+
+                        <CardTitle className="text-2xl font-semibold">{meal.strMeal}</CardTitle>
+
+                        <CardDescription>
+                            {meal.strCategory}
+                        </CardDescription>
+                    </CardContent>
                 </Card>
             ))}
         </article>
