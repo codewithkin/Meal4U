@@ -7,6 +7,8 @@ async function Page() {
   // Fetch all of the meal categories
   const {data: {categories: { categories }}} = await axios.get(`${frontendUrl}/api/meals/categories`) as { data: {categories: { categories: category[] }}; categories: category[] };
 
+    
+
   return (
     <article>
         <article className='bg-slate-800 py-2 px-4'>
@@ -24,6 +26,8 @@ async function Page() {
                 ))
             }
         </article>
+
+
     </article>
   )
 }
