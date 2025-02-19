@@ -8,12 +8,15 @@ import Image from "next/image";
 import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function CategoryMeals() {
     // Get the current category from the Zustand store
     const category = useCategoryStore((state) => state.category);
 
     if (!category) throw new Error("No category");
+
+    const router = useRouter();
 
     // Fetch the meals that match the current category
     const { data: meals, isPending, error } = useQuery({
@@ -44,7 +47,7 @@ export default function CategoryMeals() {
     return (
         <article className="grid md:grid-cols-3 lg:grid-cols-4 sm:grid-cols-2 gap-8">
             {meals.map((meal: Meal) => (
-                <Card key={meal.idMeal}>
+                <Card onClick={() => router.push(`/meal/${meal.idMeal}`)} className="hover:shadow-2xl transition duration-300 hover:cursor-pointer" key={meal.idMeal}>
                     <CardHeader>
                         <Image 
                             className="rounded-xl"
@@ -75,14 +78,6 @@ export default function CategoryMeals() {
                             {meal.strInstructions.slice(0, 100)}...
                         </p>
                     </CardContent>
-
-                    <CardFooter>
-                        <Button className="w-full font-semibold py-4" asChild>
-                            <Link href={`/meal/${meal.idMeal}`}>
-                                View Full Details
-                            </Link>
-                        </Button>
-                    </CardFooter>
                 </Card>
             ))}
         </article>
