@@ -8,7 +8,7 @@ export default function Categories({ categories }: {categories: category[]}) {
     const setCategory = useCategoryStore(state => state.setCategory);
 
     // Set the category to be the first category by default
-    setCategory(categories[0].idCategory);
+    setCategory(categories[0].strCategory);
 
     return (
         <article className="w-full justify-center items-center overflow-x-scroll md:overflow-x-hidden flex gap-4 items-center p-4">
@@ -16,7 +16,7 @@ export default function Categories({ categories }: {categories: category[]}) {
                 categories.map((category: category) => (
                     <Badge 
                     onClick={() => {
-                        setCategory(category.idCategory)
+                        setCategory(category.strCategory)
                     }}
                     color="primary"
                     key={category.idCategory}>
