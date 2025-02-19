@@ -46,7 +46,7 @@ export default function CategoryMeals() {
     if (!meals || meals.length === 0) return <p>No meals found for {category}.</p>;
 
     return (
-        <article className="grid md:grid-cols-3 lg:grid-cols-4 sm:grid-cols-2 gap-8 my-10 px-4 md:px-12 md:my-20">
+        <article className="grid md:grid-cols-3 lg:grid-cols-4 sm:grid-cols-2 gap-8 my-14 px-4 md:px-12 md:my-40">
             {meals.map((meal: Meal) => (
                 <Card onClick={() => router.push(`/meal/${meal.idMeal}`)} className="hover:shadow-xl transition duration-300 hover:cursor-pointer" key={meal.idMeal}>
                     <CardHeader>

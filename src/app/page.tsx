@@ -12,11 +12,14 @@ async function Page() {
 
   return (
     <article>
-        <article className='bg-slate-800 py-2 px-4'>
-            <h2 className='text-green-300 text-2xl font-semibold'>Meals4U</h2>
-        </article>
+        <article className="w-full h-full fixed top-0">
+            <article className='bg-slate-800 py-2 px-4'>
+                <h2 className='text-green-300 text-2xl font-semibold'>Meals4U</h2>
+            </article>
 
-        <Categories categories={categories} />
+            <Categories categories={categories} />
+        </article>
+       
 
         <CategoryMeals />
     </article>

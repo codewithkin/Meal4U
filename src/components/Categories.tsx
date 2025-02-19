@@ -13,7 +13,7 @@ export default function Categories({ categories }: {categories: category[]}) {
     const category = useCategoryStore(state => state.category);
 
     return (
-        <article className="w-full justify-center items-center overflow-x-scroll md:overflow-x-hidden flex gap-4 items-center p-4">
+        <article className="w-full justify-center items-center overflow-x-scroll md:overflow-x-hidden flex gap-4 bg-white p-4">
             {
                 categories.map((category: category) => (
                     <Badge 
