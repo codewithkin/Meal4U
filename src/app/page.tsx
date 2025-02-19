@@ -1,4 +1,5 @@
 import Categories from '@/components/Categories';
+import CategoryMeals from '@/components/CategoryMeals';
 import { Badge } from '@/components/ui/badge';
 import frontendUrl from '@/lib/frontendUrl';
 import useCategoryStore from '@/stores/categoryStore';
@@ -17,7 +18,7 @@ async function Page() {
 
         <Categories categories={categories} />
 
-        
+        <CategoryMeals />
     </article>
   )
 }
