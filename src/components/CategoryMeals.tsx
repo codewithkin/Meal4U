@@ -3,7 +3,7 @@ import useCategoryStore from "@/stores/categoryStore";
 import { Meal } from "@/types";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { Card, CardHeader } from "./ui/card";
+import { Card, CardHeader, CardTitle } from "./ui/card";
 import Image from "next/image";
 
 export default function CategoryMeals() {
@@ -30,18 +30,19 @@ export default function CategoryMeals() {
 
     return (
         <article className="grid md:grid-cols-3 lg:grid-cols-4 sm:grid-cols-2">
-            <h2>Howdie !</h2>
             {meals.map((meal: Meal) => (
                 <Card key={meal.idMeal}>
                     <CardHeader>
                         <Image 
+                            className="rounded-xl"
                             src={meal.strMealThumb} 
                             alt={meal.strMeal} 
-                            width={200}
+                            width={400}
                             height={100}
                         />
+
+                        <CardTitle className="text-2xl font-semibold mt-4">{meal.strMeal}</CardTitle>
                     </CardHeader>
-                    <p>{meal.strMeal}</p>
                 </Card>
             ))}
         </article>
