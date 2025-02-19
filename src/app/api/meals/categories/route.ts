@@ -10,7 +10,7 @@ export async function GET () {
         const categories = response.data as { categories: category[] };
         console.log("DATA: ", categories);
 
-        return NextResponse.json(categories);
+        return NextResponse.json({categories});
     } catch (e) {
         console.log("An error occured while fetching categories: ", e);
         return NextResponse.json({
