@@ -9,12 +9,16 @@ async function Page() {
 
   return (
     <article>
-        <h2>Meals</h2>
+        <article className='bg-slate-800 py-2 px-4'>
+            <h2 className='text-green-300 text-2xl font-semibold'>Meals4U</h2>
+        </article>
 
-        <article className="w-full overflow-x-scroll flex gap-4 items-center">
+        <article className="w-full justify-center items-center overflow-x-scroll md:overflow-x-hidden flex gap-4 items-center p-4">
             {
                 categories.map((category: category) => (
-                    <Badge key={category.idCategory}>
+                    <Badge 
+                    color="primary"
+                    key={category.idCategory}>
                         {category.strCategory}
                     </Badge>
                 ))
