@@ -9,6 +9,7 @@ import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import LoadingMeals from "./loading/LoadingMeals";
 
 export default function CategoryMeals() {
     // Get the current category from the Zustand store
@@ -38,16 +39,16 @@ export default function CategoryMeals() {
         enabled: !!category, // Prevents fetching if category is null
     });
 
-    if (isPending) return <p>Loading...</p>;
+    if (isPending) return <LoadingMeals />;
 
     if (error) return <p>Error: {error.message}</p>;
 
     if (!meals || meals.length === 0) return <p>No meals found for {category}.</p>;
 
     return (
-        <article className="grid md:grid-cols-3 lg:grid-cols-4 sm:grid-cols-2 gap-8">
+        <article className="grid md:grid-cols-3 lg:grid-cols-4 sm:grid-cols-2 gap-8 my-10 px-4 md:px-12 md:my-20">
             {meals.map((meal: Meal) => (
-                <Card onClick={() => router.push(`/meal/${meal.idMeal}`)} className="hover:shadow-2xl transition duration-300 hover:cursor-pointer" key={meal.idMeal}>
+                <Card onClick={() => router.push(`/meal/${meal.idMeal}`)} className="hover:shadow-xl transition duration-300 hover:cursor-pointer" key={meal.idMeal}>
                     <CardHeader>
                         <Image 
                             className="rounded-xl"
