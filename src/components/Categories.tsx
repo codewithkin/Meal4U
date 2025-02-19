@@ -17,6 +17,7 @@ export default function Categories({ categories }: {categories: category[]}) {
             {
                 categories.map((category: category) => (
                     <Badge 
+                    className="hover:cursor-pointer"
                     onClick={() => {
                         setCategory(category.strCategory)
                     }}

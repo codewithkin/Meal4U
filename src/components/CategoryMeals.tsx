@@ -3,9 +3,11 @@ import useCategoryStore from "@/stores/categoryStore";
 import { Meal } from "@/types";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./ui/card";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "./ui/card";
 import Image from "next/image";
 import { Badge } from "./ui/badge";
+import { Button } from "./ui/button";
+import Link from "next/link";
 
 export default function CategoryMeals() {
     // Get the current category from the Zustand store
@@ -63,7 +65,7 @@ export default function CategoryMeals() {
                             }
                         </article>
 
-                        <CardTitle className="text-2xl font-semibold">{meal.strMeal}</CardTitle>
+                        <CardTitle className="text-2xl my-2 font-semibold">{meal.strMeal}</CardTitle>
 
                         <CardDescription>
                             {meal.strCategory} - {meal.strArea}
@@ -73,6 +75,14 @@ export default function CategoryMeals() {
                             {meal.strInstructions.slice(0, 100)}...
                         </p>
                     </CardContent>
+
+                    <CardFooter>
+                        <Button className="w-full font-semibold py-4" asChild>
+                            <Link href={`/meal/${meal.idMeal}`}>
+                                View Full Details
+                            </Link>
+                        </Button>
+                    </CardFooter>
                 </Card>
             ))}
         </article>
