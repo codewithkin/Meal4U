@@ -5,7 +5,7 @@ import axios from "axios";
 export async function GET () {
     try {
         // Get all of the meal categories
-        const data = await axios.get("www.themealdb.com/api/json/v1/1/categories.php");
+        const data = await axios.get("https://www.themealdb.com/api/json/v1/1/categories.php");
 
         return NextResponse.json(data);
     } catch (e) {
